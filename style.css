@@ -1,0 +1,200 @@
+/* ////////////////////////////////////////navbar */
+.navbar{
+  background-color: #5C3D2E;
+  width: 100%;
+  /* position: relative;
+  position: fixed; */
+  
+  }
+  .navbar-brand,.nav-link{
+    color: #F0CAA3;
+  }
+  .navbar-brand:hover,.nav-link:hover{
+  color: #fff;
+  }
+  .nav-link{
+    font-size: 17px;
+    /* margin-left: 1%; */
+  }
+  .Cafateria{
+    width: 50%;
+    margin: auto;
+    padding-top: 1%;
+  color: #DB996C;
+  }
+  
+  .navbar-brand{
+    margin-right: 3%;
+    margin-left: 1%;
+    font-weight: bolder;
+    font-size: 25px;
+  }
+  .admin{
+    color:#F0CAA3 ;
+    font-size: 17px;
+    /* margin: 5% 5% 0% 787%; */
+  }
+  .adminAll{
+    color:#F0CAA3 ;
+    font-size: 17px;
+    margin: 5% 5% 0% 787%;
+  }
+  /* //////////////////////////////////////// background */
+  .back {
+    background-attachment: fixed;
+    background-image:url('coffee/CaffeineHeartDisease.jpg') ;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+  
+  /* ////////////////////////////////////////add order */
+  
+
+  .Addorder{
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  color: #DB996C;
+  padding-top: 5%;
+  /* text-align: center; */
+  }
+      .product_in_order{
+      margin: 2% 2% 2% 0%;
+    }
+    .addorderform{
+      margin: 4% 0% 0% 10%;
+    }
+
+    .ordersubmitbtn{
+      background-color: #DB996C;
+      color: #fff;
+      border-radius: 10%;
+      margin: 0% 0% 2% 9%;
+      padding: 2% 4%;
+      border: none;
+  }
+  .card {
+    background-color: #DB996C;
+    color: #fff;
+    border-radius: 5%;
+    line-height: 43%;
+    width: 9rem; 
+    height:10rem;
+  }
+  .card p{
+    font-size: 15px;
+  }
+  .lates_card{
+    height:9rem !important;
+  }
+.TotalPriceOrder{
+  width: 154px;
+  display:inline-block;
+  font-size: 15px;
+}
+.readonlyinputOrder{
+  width: 80px;
+  display:inline-block ;
+  font-size: 15px;
+}
+  .countinputOrder{
+    width: 60px;
+    display:inline-block ;
+    font-size: 15px;
+  }
+
+
+    /* //////////////////////////////////////// user/product */
+
+.allorders,.Allproducts,.alluser{
+  width: 72%;
+  margin: 5% 0% 2% 16%;
+  background-color:#DB996C;
+  color: #fff;
+  position: absolute;
+  padding: 2%;
+}
+.linkAdduser,.linkAddproduct,.linkAddorder{
+padding: 3% 0% 1% 0%;
+
+}
+.linkAdduser a,.linkAddorder a ,.linkAddproduct a{
+  color: #5C3D2E;
+}
+th, td {
+  padding: 15px;
+  color: #5C3D2E;
+}
+td a{
+  color: #5C3D2E;
+}
+table {
+  border-spacing: 30px;
+}
+
+  .inputAddproduct input ,.inputAdduser input{
+    width: 300px;
+  }
+  
+  .p_addproduct,.p_adduser{
+    text-align: center;
+  }
+  .Imgaddprodct{
+    margin-top: 11%;
+  
+  }
+  .Imgadduser{
+    margin-top: 1%;
+    margin-left: 10%;
+  }
+  
+  
+
+  .adduser{
+    width: 32%;
+    margin: auto;
+    margin: 5% 0% 0% 10%;
+    border: 1px solid #5C3D2E;
+    padding: 1% 1% 1% 1%;
+  color: #DB996C;
+  background-color: #5C3D2E;
+  position: absolute;
+  }
+  .usersubmitbtn{
+    background-color: #DB996C;
+    color: #fff;
+    border-radius: 10%;
+    margin: 2% 0% 2% 20%;
+    padding: 2% 4%;
+    border: none;
+  }
+  
+  .login,.addproduct {
+    width: 32%;
+    margin: auto;
+    margin: 8% 0% 0% 10%;
+    border: 1px solid #5C3D2E;
+    padding: 3% 1% 1% 1%;
+  color: #DB996C;
+  background-color: #5C3D2E;
+  position: absolute;
+  }
+
+  
+
+  
+
+  .submitbtn{
+      background-color: #DB996C;
+      color: #fff;
+      border-radius: 10%;
+      margin: 10% 0% 4% 20%;
+      padding: 2% 4%;
+      border: none;
+  }
+  
+    .imgproduct{
+      margin: 2%;
+    }
