@@ -38,6 +38,16 @@ function select($column ,$table ,$condition){
      function details($column,$table,$table2 ,$table3 ,$table4 ,$condition){
         return $this->connection->query("select $column  FROM $table JOIN  $table2 JOIN  $table3 JOIN  $table4 ON $condition");
      }
+     function showMix($column , $table){
+        $sth =$this->connection->prepare("select MAX($column) FROM $table");
+        $sth->execute();
+     $result = $sth->fetchAll();
+    foreach($result as $key=>$row)
+    {
+        return  $orderid= $row['MAX(id)'];
+    }
+     }
+
      function showdb(){
         return $this->connection->query("SHOW TABLES");
      }

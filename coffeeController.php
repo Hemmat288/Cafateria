@@ -4,6 +4,7 @@
     require("user.php");
     require("product.php");
     require("orders.php");
+    require("order_details.php");
     require("db.php");
 
 
@@ -12,6 +13,7 @@
     $user = new user();
     $product = new product();
     $orders = new orders();
+    $order_details = new order_details();
 
 
 
@@ -181,9 +183,32 @@
     }
     //   ----------------------------add order----------------------------
     if (isset($_REQUEST['addorder'])) {
+      $productid=[];
+      $productname=[];
+      $productcount=[];
+      $pricecountproduct=[];
+    
+      foreach($_REQUEST['productid'] as $k => $v) {
+        array_push($productid,$v);
+   
+    }
+      foreach($_POST['productname'] as $k => $v) {
+          array_push($productname,$v);
+      }
+      foreach($_POST['productcount'] as $k => $v) {
+          
+          array_push($productcount,(int)$v);
+      }
+      foreach($_POST['productprice'] as $k => $v) {
+          array_push($pricecountproduct,(float)$v);
+      }
+
+      ///////////////////////////////////
       try {
         $orders->total_price = $orders->validation($_REQUEST['total_price']);
         $orders->note = $orders->validation($_REQUEST['note']);
+        $orders->user_id = $orders->validation($_REQUEST['selectedUserid']);
+        $order_id=$db->showMix("id","orders");
         $errors = $orders->countError();
         if ($errors > 0) {
           $errorArray = json_encode($student->errors);
@@ -191,12 +216,20 @@
         } else {
           $total_price = $orders->total_price;
           $note = $orders->note;
+          $user_id = $orders->user_id;
           echo "hi2";
+
+  ///////////////////////////add in orders
           $db->insert("orders", "
                total_price ='$total_price',
-               note='$note'");
-          header("location:Allorder.php?total_price=$total_price");
-        }
+               note='$note',user_id='$user_id'");
+               echo "hi3";
+///////////////////////////add in orderDetails
+for($i=0;$i<count($productcount);$i++){
+ $db->insert("order_details","order_id='$order_id',product_id='$productid[$i]',qty='$productcount[$i]',price= '$pricecountproduct[$i]'");
+  }
+            header("location:Allorder.php?total_price=$total_price");
+     }
       } catch (PDOException $e) {
         echo "error";
       }

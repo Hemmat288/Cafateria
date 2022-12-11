@@ -68,6 +68,25 @@ $orders = new orders();
       <div class="col-md-4 addorderform">
         <form action="coffeeController.php" method="post" enctype="multipart/form-data">
 
+  <!------------------------- user-->
+<select name="selectedUserid" class="form-select userselect" aria-label="Default select example">
+                  <?php
+                   
+                  $usersname = $db->show("id,name","user");
+                  ?>
+                  <option selected>Select user</option>
+                  <?php
+                  foreach ($usersname as $row) { ?>
+
+                    <option value="<?php echo $row['id'] ?>" > <?php echo $row['name'] ?></option>
+                  <?php
+                  }
+                  ?>
+                </select>
+
+
+
+          <!------------------------- ordes-->
           <div id="order_quentity">
           </div>
           <!------------------------- total_price-->
@@ -83,7 +102,7 @@ $orders = new orders();
 
           <div class="form-group">
             <label>
-              <textarea name="note" id="" cols="30" rows="2" placeholder="Write Any Note"></textarea>
+              <textarea name="note" id="" cols="28" rows="2" placeholder="Write Any Note"></textarea>
             </label>
 
           </div>
@@ -143,7 +162,7 @@ $orders = new orders();
         var imgurl = $(this).attr("src");
         var product_price = $(this).attr("product_price");
         const product_title = $(this).attr("product_title");
-        allprice[product_title] = Number(product_price);
+        allprice[id] = Number(product_price);
 
         var product = `<div class='card product_in_order lates_card'>
 <img class='card-img-top' style='width:80; height:100;' src='${imgurl}'>
@@ -156,17 +175,18 @@ $orders = new orders();
 
 
         var space = " ";
-        product = `<input type="text"
+        product = `<input hidden name="productid[]" value="${id}"> 
+        <input type="text" name="productname[]"
    value=${product_title} 
    class="form-control readonlyinputOrder " readonly  >
 
    <input 
-    type="number" min=1  placeholder="${product_title}" 
+    type="number" min=1  placeholder="${id}"  name="productcount[]"  
     product_price="${product_price}" value=1  onclick="convert(this,this.value)" 
     class="form-control countinputOrder" ">
 
 <input type="number"
- id="${product_title}" 
+ id="${id}" name="productprice[]"
   value="${product_price}" class="form-control readonlyinputOrder"  readonly>
 
  ${space}  <span class="egp">LE<span><br><br>`;
@@ -183,7 +203,7 @@ $orders = new orders();
       let link = $(x).attr("placeholder")
       let product_price = $(x).attr("product_price");
       let finalprice = Number(product_price) *  Number(number);
-      $("#" + link).val(Number(finalprice));
+      $(document).find(`#${link}`).val(Number(finalprice));
       allprice[link] = finalprice;
       var counter = 0;
       for (var x in allprice) {

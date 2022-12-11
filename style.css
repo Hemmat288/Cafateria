@@ -185,6 +185,13 @@ table {
   
 
   
+    select {
+      word-wrap: normal;
+      width: 231px;
+      margin-bottom: 5%;
+      border-block-color: #DB996C;
+      color: #5C3D2E;
+  }
 
   .submitbtn{
       background-color: #DB996C;
