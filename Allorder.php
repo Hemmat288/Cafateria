@@ -1,10 +1,5 @@
 <?php
-//      if($_COOKIE["fname"]){
-//         echo" <h2>Welcome  {$_COOKIE["fname"]}</h2>" ;
-//  }
-//   else{
-//       header("location:login.php");
-//   }
+     if($_COOKIE["name"]){
 
 
  require("orders.php");
@@ -61,60 +56,121 @@ $user = new user();
             </li>
           </ul>
 
-          <div>
-           <!-- <img src="" width="50" height="50"> -->
-           <p class="adminAll">  <?php echo"$_COOKIE[name]"?></p>
-          </div>
-
+        </div>
+        <div class="admin" style="display: flex;margin-right:3%;">
+     
+        <img style="border-radius: 50%;" src="coffee/<?php echo "$_COOKIE[src]" ?>" width="40" height="40">
+           <p style="margin-left:5%; padding-top:7%"> <?php echo "$_COOKIE[name]" ?></p>
+          <p style="margin-left:17%; padding-top:7%">logout</p>
         </div>
       </nav>
 
 <!-- ///////////////////////////////////////body -->
-<div class="back">
+<!-- <div class="backorder" style="background-image:url('coffee/CaffeineHeartDisease.jpg') ;
+     background-image: url(coffee/CaffeineHeartDisease.jpg);
+    height: 300vh;
+    position: relative;
+    background-position: center;
+    background-repeat: repeat-y;
+    
+    background-size: content;
+    width: 100%;
+     "> -->
 <div class="allorders">
      <h2 class="linkAddorder"><a href="addorder.php">Add Order</a></h2> 
+
+     <?php
+$id="";
+$name="";
+$orderDate;
+$counter=0;
+$data=$db->details("orders.date,orders.id,orders.total_price,user.name,user.ext,user.room_number,orders.status,product.title,order_details.price,product.image,order_details.qty","orders","order_details","user","product","orders.id=order_details.order_id AND user.id=orders.user_id AND order_details.product_id=product.id");
+
+ foreach ($data as $k=>$row) {
+  // var_dump($row);
+  if($name==$row['name'] && $orderDate==$row['date'] ){
+    ?>
+
+    <div style="float:left; width:25%; margin-top:1%; text-align:center; ">
+    <div  class="position-relative">
+    <img width="100" height="90" style="border-radius:10%" src="coffee/<?php echo $row['image']?>">
+  <span style="background:#986644 !important;" class="position-absolute top-20 start-60 translate-middle p-2   badge rounded-pill bg-dark border border-light ">
+  <?php echo $row['price']?>LE </span>
+</div>
+     <p class="p_detailsOrder"><?php echo$row['qty']."  " . $row['title']?></p>
+
+    </div>
+  <?php
+
+  }
+  else{
+
+    $name=$row['name'];
+    $orderDate=$row['date'];
+
+    if($counter>0){
+      ?>
+      <div style="float:right;width:100%;padding-left:85%;color:#5C3D2E;">
+        <h6><?php echo "total price = ".$total_price?> LE </h6>
+      </div>
+      <?php
+    }
+    $counter++;
+    $total_price=$row['total_price'];
+    ?>
       <table class="table table-striped">
   <thead>
     <tr>
-        <th scope="col">total_price</th>
+        <th scope="col">order Date</th>
         <th scope="col"> name</th>
         <th scope="col"> Ext</th>
-        <th scope="col">n.Room</th>
+        <th scope="col">Room</th>
         <th scope="col"> status</th>
-        <th scope="col">title</th>
-        <th scope="col">price</th>
-        <th scope="col">image</th>
     </tr>
   </thead>
   <tbody>
-  <?php
-
-try {
-$data=$db->details("orders.total_price,user.name,user.ext,user.room_number,orders.status,product.title,product.price,product.image","orders","order_details","user","product","orders.id=order_details.order_id AND user.id=orders.user_id AND order_details.product_id=product.id");
-
-  while ($row = $data->fetch(PDO::FETCH_ASSOC)) {
-    echo "<tr>";
-    foreach ($row as $value) {
-      echo "<td> $value </td>";
-    }
-    // echo "<td><a href='coffeeController.php?id={$row['id']}&show'>show</a></td>";
-    // echo "<td><a href='coffeeController.php?id={$row['id']}&edit'>edit</a></td>";
-    // echo "<td><a href='coffeeController.php?id={$row['id']}&delete'>delete</a></td>";
-    echo  "</tr>";
-  }
-} catch (PDOException $e) {
-  echo "error catch";
-}
-
-$pdo = null;
+  <tr>
+<?php
+     echo "<td>$row[date]</td>";
+     echo "<td>$row[name]</td>";
+     echo "<td>$row[ext]</td>";
+     echo "<td>$row[room_number]</td>";
+     echo "<td>$row[status]</td>";
 ?>
+ </tr>
   </tbody>
-</table>
+      </table>
+ 
+
+<div style="float:left; width:25%; margin-top:1%;">
+    <div  class="position-relative">
+    <img width="100" height="90"style="border-radius:10%" src="coffee/<?php echo $row['image']?>">
+  <span style="background:#986644 !important;" class="position-absolute top-20 start-60 translate-middle p-2   badge rounded-pill  border border-light ">
+
+  <?php echo $row['price']?>LE </span>
 </div>
+     <p class="p_detailsOrder"><?php echo$row['qty']."  " . $row['title']?></p>
+    </div>
+
+  <?php
+  }
+  
+}
+ ?>
+ <div style="float:right;width:100%;padding-left:85%;color:#5C3D2E;">
+        <h6><?php echo "total price = ".$total_price?> LE </h6>
+      </div>
+   
 </div>
+<!-- </div> -->
 </body>
 
 </html>
 
 
- 
+<?php
+} else {
+  header("location:login.php");
+}
+
+?>

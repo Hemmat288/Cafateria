@@ -1,10 +1,6 @@
-<!-- <?php
-//      if($_COOKIE["name"]){
-//         echo" <h2>Welcome  {$_COOKIE["name"]}</h2>" ;
-//  }
-//   else{
-//       header("location:login.php");
-//   }
+<?php
+    if($_COOKIE["name"]){
+
 
 
 
@@ -14,8 +10,8 @@
 // }
  
 
-// ?>
-  -->
+?>
+
 
 
 <!DOCTYPE html>
@@ -57,10 +53,12 @@
             </li>
           </ul>
 
-          <div>
-           <!-- <img src="" width="50" height="50"> -->
-           <p class="admin">  <?php echo"$_COOKIE[name]"?></p>
-          </div>
+          <div class="admin" style="display: flex;margin-right:3%;">
+     
+          <img style="border-radius: 50%;" src="coffee/<?php echo "$_COOKIE[src]" ?>" width="40" height="40">
+              <p style="margin-left:5%; padding-top:7%"> <?php echo "$_COOKIE[name]" ?></p>
+     <p style="margin-left:17%; padding-top:7%">logout</p>
+   </div>
 
         </div>
       </nav>
@@ -147,3 +145,9 @@
 
 </body>
 </html>
+<?php
+} else {
+  header("location:login.php");
+}
+
+?>

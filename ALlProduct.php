@@ -1,10 +1,6 @@
 <?php
-//      if($_COOKIE["name"]){
-//         echo" <h2>Welcome  {$_COOKIE["name"]}</h2>" ;
-//  }
-//   else{
-//       header("location:login.php");
-//   }
+  if($_COOKIE["name"]){
+
 
 
 
@@ -59,12 +55,14 @@ $product = new product();
             </li>
           </ul>
 
-          <div>
-           <!-- <img src="" width="50" height="50"> -->
-           <p class="adminAll"><?php echo"$_COOKIE[name]"?></p>
-          </div>
 
         </div>
+        <div class="admin" style="display: flex;margin-right:3%;">
+     
+        <img style="border-radius: 50%;" src="coffee/<?php echo "$_COOKIE[src]" ?>" width="40" height="40">
+            <p style="margin-left:5%; padding-top:7%"> <?php echo "$_COOKIE[name]" ?></p>
+     <p style="margin-left:17%; padding-top:7%">logout</p>
+   </div>
       </nav>
 
 <!-- ///////////////////////////////////////body -->
@@ -114,3 +112,9 @@ $pdo = null;
 </body>
 
 </html>
+<?php
+} else {
+  header("location:login.php");
+}
+
+?>

@@ -36,8 +36,10 @@ function select($column ,$table ,$condition){
     return $this->connection->query  ("select $column from $table");
      }
      function details($column,$table,$table2 ,$table3 ,$table4 ,$condition){
-        return $this->connection->query("select $column  FROM $table JOIN  $table2 JOIN  $table3 JOIN  $table4 ON $condition");
-     }
+        $sth =$this->connection->prepare("select $column  FROM $table JOIN  $table2 JOIN  $table3 JOIN  $table4 ON $condition");
+        $sth->execute();
+        return  $result = $sth->fetchAll();
+    }
      function showMix($column , $table){
         $sth =$this->connection->prepare("select MAX($column) FROM $table");
         $sth->execute();

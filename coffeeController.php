@@ -21,7 +21,7 @@
     //   ----------------------------login user----------------------------
     if (isset($_POST['login'])) {
       $sudentData = $db->select("*", "user", " email='{$_POST['email']}' and password='{$_POST['password']}'");
-
+ 
       $studentinfo = $sudentData->fetch(PDO::FETCH_ASSOC);
       $email = $studentinfo["email"];
       $password = $studentinfo["password"];
@@ -29,6 +29,8 @@
       //////////////// $ sudentData check not work with me
       if ($password != "" && $email != "") {
         setcookie("name", $studentinfo["name"]);
+        setcookie("src", $studentinfo["image"]);
+
         header("location:AllUser.php");
       } else {
         header("location:login.php");
@@ -96,15 +98,15 @@
     }
 
 
-     //   ----------------------------edit user----------------------------
-     elseif (isset($_REQUEST['edit'])) {
+    //   ----------------------------edit user----------------------------
+    elseif (isset($_REQUEST['edit'])) {
 
 
       $id = $_REQUEST['id'];
 
       try {
 
-        $datadb = $db->select("*","user","id=$id");
+        $datadb = $db->select("*", "user", "id=$id");
 
         $userEditData = json_encode($datadb->fetch(PDO::FETCH_ASSOC));
 
@@ -183,24 +185,23 @@
     }
     //   ----------------------------add order----------------------------
     if (isset($_REQUEST['addorder'])) {
-      $productid=[];
-      $productname=[];
-      $productcount=[];
-      $pricecountproduct=[];
-    
-      foreach($_REQUEST['productid'] as $k => $v) {
-        array_push($productid,$v);
-   
-    }
-      foreach($_POST['productname'] as $k => $v) {
-          array_push($productname,$v);
+      $productid = [];
+      $productname = [];
+      $productcount = [];
+      $pricecountproduct = [];
+
+      foreach ($_REQUEST['productid'] as $k => $v) {
+        array_push($productid, $v);
       }
-      foreach($_POST['productcount'] as $k => $v) {
-          
-          array_push($productcount,(int)$v);
+      foreach ($_POST['productname'] as $k => $v) {
+        array_push($productname, $v);
       }
-      foreach($_POST['productprice'] as $k => $v) {
-          array_push($pricecountproduct,(float)$v);
+      foreach ($_POST['productcount'] as $k => $v) {
+
+        array_push($productcount, (int)$v);
+      }
+      foreach ($_POST['productprice'] as $k => $v) {
+        array_push($pricecountproduct, (float)$v);
       }
 
       ///////////////////////////////////
@@ -208,7 +209,7 @@
         $orders->total_price = $orders->validation($_REQUEST['total_price']);
         $orders->note = $orders->validation($_REQUEST['note']);
         $orders->user_id = $orders->validation($_REQUEST['selectedUserid']);
-        $order_id=$db->showMix("id","orders");
+
         $errors = $orders->countError();
         if ($errors > 0) {
           $errorArray = json_encode($student->errors);
@@ -219,17 +220,19 @@
           $user_id = $orders->user_id;
           echo "hi2";
 
-  ///////////////////////////add in orders
+          ///////////////////////////add in orders
           $db->insert("orders", "
                total_price ='$total_price',
                note='$note',user_id='$user_id'");
-               echo "hi3";
-///////////////////////////add in orderDetails
-for($i=0;$i<count($productcount);$i++){
- $db->insert("order_details","order_id='$order_id',product_id='$productid[$i]',qty='$productcount[$i]',price= '$pricecountproduct[$i]'");
-  }
-            header("location:Allorder.php?total_price=$total_price");
-     }
+          echo "hi3";
+          ///////////////////////////add in orderDetails
+          $order_id = $db->showMix("id", "orders");
+
+          for ($i = 0; $i < count($productcount); $i++) {
+            $db->insert("order_details", "order_id='$order_id',product_id='$productid[$i]',qty='$productcount[$i]',price= '$pricecountproduct[$i]'");
+          }
+          header("location:Allorder.php?total_price=$total_price");
+        }
       } catch (PDOException $e) {
         echo "error";
       }
@@ -295,32 +298,19 @@ for($i=0;$i<count($productcount);$i++){
       }
     }
     //   ----------------------------edit product----------------------------
-    else if(isset($_REQUEST['edit'])){
-      $id=$_REQUEST['id'];
-      try {  
-       $sudentData=$db->select("*","product","id=$id");
-       
-        $productinfo=$sudentData->fetch(PDO::FETCH_ASSOC);
-         $dataproductEdit=json_encode($productinfo);
-         header("location:editProduct.php?dataproductEdit=$dataproductEdit");
-      }catch(PDOException $e){
-       echo $e;
-        }
-        $connection = null;
-      }
-    //   ----------------------------show Student----------------------------
-    elseif (isset($_REQUEST['show'])) {
+    else if (isset($_REQUEST['edit'])) {
       $id = $_REQUEST['id'];
-
       try {
-        $data = $db->select(" * ",  "student",  "id=$id");
+        $sudentData = $db->select("*", "product", "id=$id");
 
-        $datainfo = json_encode($data->fetch(PDO::FETCH_ASSOC));
-
-        header("location:show.php?data=$datainfo");
+        $productinfo = $sudentData->fetch(PDO::FETCH_ASSOC);
+        $dataproductEdit = json_encode($productinfo);
+        header("location:editProduct.php?dataproductEdit=$dataproductEdit");
       } catch (PDOException $e) {
-        echo "connection failed";
+        echo $e;
       }
+      $connection = null;
     }
-   
+
+
     ?>
