@@ -45,7 +45,7 @@
      
         <img style="border-radius: 50%;" src="coffee/<?php echo "$_COOKIE[src]" ?>" width="40" height="40">
             <p style="margin-left:5%; padding-top:7%"> <?php echo "$_COOKIE[name]" ?></p>
-     <p style="margin-left:17%; padding-top:7%">logout</p>
+            <a style="margin-left:17%; padding-top:7%; color:#F0CAA3 ;" href="logout.php" name="logout">logout</a>
    </div>
       </nav>
 

@@ -59,7 +59,7 @@ $orders = new orders();
      
      <img style="border-radius: 50%;" src="coffee/<?php echo "$_COOKIE[src]" ?>" width="40" height="40">
      <p style="margin-left:5%; padding-top:7%"> <?php echo "$_COOKIE[name]" ?></p>
-     <p style="margin-left:17%; padding-top:7%">logout</p>
+     <a style="margin-left:17%; padding-top:7%; color:#F0CAA3 ;" href="logout.php" name="logout">logout</a>
    </div>
   </nav>
 
@@ -136,7 +136,7 @@ $orders = new orders();
               while ($row = $data->fetch(PDO::FETCH_ASSOC)) {
 
                 echo "<div class='card products product_in_order' id='$row[id]' src='coffee/$row[image]' product_title='$row[title]' product_price='$row[price]' >";
-                echo "<img class='card-img-top' style='width:80; height:100;' src='coffee/$row[image]'>";
+                echo "<img class='card-img-top' style='width:80 !important; height: 100px !important;' src='coffee/$row[image]'>";
                 echo "<div class='card-body'>";
                 echo "<p>title : $row[title] </p>";
                 echo "<p>Price : $row[price] </p>";
@@ -169,7 +169,7 @@ $orders = new orders();
         allprice[id] = Number(product_price);
 
         var product = `<div class='card product_in_order lates_card'>
-<img class='card-img-top' style='width:80; height:100;' src='${imgurl}'>
+<img class='card-img-top' style='width:80 !important; height: 100px !important;' src='${imgurl}'>
 <div class='card-body'>
          <p>title : ${product_title} </p>  
          </div>

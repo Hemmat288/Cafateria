@@ -24,7 +24,7 @@ function __set($name,$value){
         }
     }
     if($name=="price"){
-        if($value>5){
+        if($value>2){
         $this->$name=$value;
         }else{
             $this->errors['price']="price must be more than 5";;

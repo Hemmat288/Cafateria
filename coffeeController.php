@@ -30,13 +30,15 @@
       if ($password != "" && $email != "") {
         setcookie("name", $studentinfo["name"]);
         setcookie("src", $studentinfo["image"]);
+        session_start();
+        $_SESSION['name']= $$studentinfo["name"];
+       $_SESSION['src']= $studentinfo["image"];
 
         header("location:AllUser.php");
       } else {
         header("location:login.php");
       }
     }
-
 
 
     //   ----------------------------add user----------------------------
@@ -48,12 +50,12 @@
         $user->name = $user->validation($_REQUEST['name']);
         $user->email = $user->validation($_REQUEST['email']);
         $user->password = $user->validation($_REQUEST['password']);
-        $user->room = $user->validation($_REQUEST['room_number']);
+        $user->room_number = $user->validation($_REQUEST['room_number']);
         $user->ext = $user->validation($_REQUEST['ext']);
         $user->image = $user->validation($_FILES["img"]["name"]);
         $errors = $user->countError();
         $imgExtension = pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);
-        $allowedExtension = ["png", "jpg", "txt"];
+        $allowedExtension = ["png", "jpg", "txt","jfif","jpeg"];
 
         if (!in_array($imgExtension, $allowedExtension)) {
           $errors["imgExtension"] = "not in allow imgExtension";
@@ -62,9 +64,7 @@
         }
 
         if (!move_uploaded_file(
-          $_FILES["img"]["tmp_name"],
-          $_FILES["img"]["name"]
-        )) {
+          $_FILES["img"]["tmp_name"],"coffee/$_FILES[img][name]")) {
           $errors["img"] = "img is not exists";
         }
         if ($errors > 0) {
@@ -97,9 +97,21 @@
       }
     }
 
+    //   ----------------------------delete user----------------------------
+    else if (isset($_REQUEST['delete'])) {
+      $id = $_REQUEST['id'];
 
+      echo $id;
+
+      try {
+        $db->delete("user", "id=$id");
+        header("location:AllUser.php");
+      } catch (PDOException $e) {
+        echo "connection failed";
+      }
+    }
     //   ----------------------------edit user----------------------------
-    elseif (isset($_REQUEST['edit'])) {
+    elseif (isset($_REQUEST['edituser'])) {
 
 
       $id = $_REQUEST['id'];
@@ -115,50 +127,42 @@
         echo "connection failed";
       }
     }
-    //   ----------------------------delete user----------------------------
-    else if (isset($_REQUEST['delete'])) {
-      $id = $_REQUEST['id'];
 
-      echo $id;
-
-      try {
-        $db->delete("user", "id=$id");
-        header("location:AllUser.php");
-      } catch (PDOException $e) {
-        echo "connection failed";
-      }
-    }
     //   ----------------------------update user----------------------------
 
     else if (isset($_REQUEST['updateUser'])) {
 
       try {
+        $user->id = $user->validation($_REQUEST['id']);
         $user->name = $user->validation($_REQUEST['name']);
         $user->email = $user->validation($_REQUEST['email']);
         $user->password = $user->validation($_REQUEST['password']);
-        $user->room = $user->validation($_REQUEST['room_number']);
+        $user->room_number = $user->validation($_REQUEST['room_number']);
         $user->ext = $user->validation($_REQUEST['ext']);
-        $user->image = $user->validation($_FILES["img"]["name"]);
         $errors = $user->countError();
+
+  if(!($_REQUEST['img']=="")){
+    echo"not empty";
+        $user->image = $user->validation($_FILES["img"]["name"]);
+    
         $imgExtension = pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);
-        $allowedExtension = ["png", "jpg", "txt"];
+        $allowedExtension = ["png", "jpg", "txt","jfif","jpeg"];
 
         if (!in_array($imgExtension, $allowedExtension)) {
           $errors["imgExtension"] = "not in allow imgExtension";
 
           header("location:adduser.php?errors=$imgExtension");
         }
-
+      
         if (!move_uploaded_file(
-          $_FILES["img"]["tmp_name"],
-          $_FILES["img"]["name"]
-        )) {
+          $_FILES["img"]["tmp_name"],"coffee/$_FILES[img][name]")) {
           $errors["img"] = "img is not exists";
         }
         if ($errors > 0) {
-          $errorArray = json_encode($student->errors);
+          $errorArray = json_encode($user->errors);
           header("location:editUser.php?errorArray=$errorArray");
         } else {
+          $id = $user->id;
           $name = $user->name;
           $email = $user->email;
           $password = $user->password;
@@ -177,8 +181,35 @@
              ", "id= $id
              ");
 
-          header("location:list.php?length=$er");
+          header("location:AllUser.php?length=$er");
         }
+      }
+      else{
+        echo"empty";
+        if ($errors > 0) {
+          $errorArray = json_encode($user->errors);
+          header("location:editUser.php?errorArray=$errorArray");
+        } else {
+          $id = $user->id;
+          $name = $user->name;
+          $email = $user->email;
+          $password = $user->password;
+          $room_number = $user->room_number;
+          $ext = $user->ext;
+
+
+          $sudentData = $db->update("user", "
+             name ='$name',
+             email='$email',
+              password='$password',
+              room_number='$room_number',
+              ext='$ext'
+             ", "id= $id
+             ");
+
+          header("location:AllUser.php?length=$er");
+        }
+      }
       } catch (PDOException $e) {
         echo $e;
       }
@@ -248,23 +279,21 @@
         $errors = $product->countError();
         $imgExtension = pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);
 
-        $allowedExtension = ["png", "jpg", "txt"];
-
+        $allowedExtension = ["png", "jpg", "txt","jfif","jpeg"];
         if (!in_array($imgExtension, $allowedExtension)) {
           $errors["imgExtension"] = "not in allow imgExtension";
           header("location:login.php?errors=$imgExtension");
         }
 
         if (!move_uploaded_file(
-          $_FILES["img"]["tmp_name"],
-          $_FILES["img"]["name"]
-        )) {
+          $_FILES["img"]["tmp_name"],"coffee/$_FILES[img][name]")) {
           $errors["img"] = "img is not exists";
         }
         if ($errors > 0) {
           $errorArray = json_encode($student->errors);
           header("location:login.php?errorArray=$errorArray");
         } else {
+         
           $title = $product->title;
           $price = $product->price;
           $image = $product->image;
@@ -298,7 +327,7 @@
       }
     }
     //   ----------------------------edit product----------------------------
-    else if (isset($_REQUEST['edit'])) {
+    else if (isset($_REQUEST['editproduct'])) {
       $id = $_REQUEST['id'];
       try {
         $sudentData = $db->select("*", "product", "id=$id");
@@ -311,6 +340,65 @@
       }
       $connection = null;
     }
+    /////////////////updateproduct////////////////////////////////
 
+    else if (isset($_REQUEST['updateproduct'])) {
 
+      try {
+        $product->id = $product->validation($_REQUEST['id']);
+        $product->title = $product->validation($_REQUEST['title']);
+        $product->price = $product->validation($_REQUEST['price']);
+        $errors = $product->countError();
+        if(!($_REQUEST['img']=="")){
+          echo "not empty";
+          $product->image = $product->validation($_FILES["img"]["name"]);
+          echo $product->image;
+          $imgExtension = pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);
+          $allowedExtension = ["png", "jpg", "txt","jfif","jpeg"];
+          if (!in_array($imgExtension, $allowedExtension)) {
+            $errors["imgExtension"] = "not in allow imgExtension";
+            header("location:login.php?errors=$imgExtension");
+          }
+  
+          if (!move_uploaded_file(
+            $_FILES["img"]["tmp_name"],
+            $_FILES["img"]["name"]
+          )) {
+            $errors["img"] = "img is not exists";
+          }
+          if ($errors > 0) {
+            $errorArray = json_encode($product->errors);
+            header("location:login.php?errorArray=$errorArray");
+          } else {
+            $id = $product->id;
+            $title = $product->title;
+            $price = $product->price;
+            $image = $product->image;
+           $db->update("product", "title ='$title',price='$price',image='$image'", "id= $id");
+        header("location:AllProduct.php?length=$er");
+        }
+      }
+      ////////////////////product widthout image
+      else{
+        echo " empty";
+        if ($errors > 0) {
+          $errorArray = json_encode($product->errors);
+          header("location:login.php?errorArray=$errorArray");
+        } 
+        else {
+          $id = $product->id;
+          $title = $product->title;
+          $price = $product->price;
+          echo $id;
+          echo $title;
+          echo $price;
+          $db->update("product", "title ='$title',price='$price'", "id= $id");
+
+         header("location:AllProduct.php?length=$er");
+        }
+      }
+      } catch (PDOException $e) {
+        echo $e;
+      }
+    }
     ?>

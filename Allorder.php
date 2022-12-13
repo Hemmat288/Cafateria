@@ -1,5 +1,5 @@
 <?php
-     if($_COOKIE["name"]){
+    //  if($_COOKIE["name"]){
 
 
  require("orders.php");
@@ -61,7 +61,7 @@ $user = new user();
      
         <img style="border-radius: 50%;" src="coffee/<?php echo "$_COOKIE[src]" ?>" width="40" height="40">
            <p style="margin-left:5%; padding-top:7%"> <?php echo "$_COOKIE[name]" ?></p>
-          <p style="margin-left:17%; padding-top:7%">logout</p>
+           <a style="margin-left:17%; padding-top:7%; color:#F0CAA3 ;" href="logout.php" name="logout">logout</a>
         </div>
       </nav>
 
@@ -84,11 +84,10 @@ $id="";
 $name="";
 $orderDate;
 $counter=0;
-$data=$db->details("orders.date,orders.id,orders.total_price,user.name,user.ext,user.room_number,orders.status,product.title,order_details.price,product.image,order_details.qty","orders","order_details","user","product","orders.id=order_details.order_id AND user.id=orders.user_id AND order_details.product_id=product.id");
+$data=$db->details("orders.date,order_details.order_id,orders.total_price,user.name,user.ext,user.room_number,orders.status,product.title,order_details.price,product.image,order_details.qty","orders","order_details","user","product","orders.id=order_details.order_id AND user.id=orders.user_id AND order_details.product_id=product.id");
 
  foreach ($data as $k=>$row) {
-  // var_dump($row);
-  if($name==$row['name'] && $orderDate==$row['date'] ){
+  if($id==$row['order_id'] && $row['name']==$name && $row['date']==$orderDate){
     ?>
 
     <div style="float:left; width:25%; margin-top:1%; text-align:center; ">
@@ -107,7 +106,7 @@ $data=$db->details("orders.date,orders.id,orders.total_price,user.name,user.ext,
 
     $name=$row['name'];
     $orderDate=$row['date'];
-
+    $id=$row['order_id'];
     if($counter>0){
       ?>
       <div style="float:right;width:100%;padding-left:85%;color:#5C3D2E;">
@@ -144,9 +143,10 @@ $data=$db->details("orders.date,orders.id,orders.total_price,user.name,user.ext,
 
 <div style="float:left; width:25%; margin-top:1%;">
     <div  class="position-relative">
-    <img width="100" height="90"style="border-radius:10%" src="coffee/<?php echo $row['image']?>">
-  <span style="background:#986644 !important;" class="position-absolute top-20 start-60 translate-middle p-2   badge rounded-pill  border border-light ">
-
+    <img width="100" height="90"style="border-radius:10%
+    " src="coffee/<?php echo $row['image']?>">
+  <span style="background:#986644 !important;" 
+  class="position-absolute top-20 start-60 translate-middle p-2  badge rounded-pill  border border-light ">
   <?php echo $row['price']?>LE </span>
 </div>
      <p class="p_detailsOrder"><?php echo$row['qty']."  " . $row['title']?></p>
@@ -156,21 +156,27 @@ $data=$db->details("orders.date,orders.id,orders.total_price,user.name,user.ext,
   }
   
 }
+if(isset($total_price)){
  ?>
+ 
  <div style="float:right;width:100%;padding-left:85%;color:#5C3D2E;">
         <h6><?php echo "total price = ".$total_price?> LE </h6>
       </div>
    
 </div>
+<?php
+}
+?>
 <!-- </div> -->
 </body>
 
 </html>
 
-
 <?php
-} else {
-  header("location:login.php");
-}
+
+    
+// } else {
+//   header("location:login.php");
+// }
 
 ?>

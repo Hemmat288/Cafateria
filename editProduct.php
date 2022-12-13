@@ -18,27 +18,17 @@ if(isset($_REQUEST['dataproductEdit'])){
 </head>
 <body>
 
- <h1>hk</h1>
- <form method="get" action="coffeeController.php">
-        <input type="hidden" value="<?= $product['id'] ?>" name="id">
+ <form method="post" action="coffeeController.php">
+        <input type="hidden" value="<?php echo $product->id ?>" name="id">
         
-        <input type="text" value="<?= $product['title'] ?>" name="title">
-             <?php if(isset($error["title"])){
-           echo $error["title"];
-         } ?>
+        <input type="text" value="<?php echo $product->title ?>" name="title">
+    
         <br>
-        <input type="number" value="<?= $product['price'] ?>" name="price">
-              <?php if(isset($error["price"])){
-           echo $error["price"];
-         } ?>
+        <input type="number" value="<?php echo $product->price ?>" name="price">
         <br>
-        <input type="text" value="<?= $product['image'] ?>" name="image" id="">
-             <?php if(isset($error["image"])){
-           echo $error["image"];
-         } ?>
+        <input name="img" type="file"    value="<?php echo $product->image ?>" ><br>
         <br>
-         
-        <input type="submit" value="update student" name="update">
+        <input type="submit" value="update" name="updateproduct">
     </form>
 </body>
 </html>
