@@ -18,7 +18,7 @@ if(isset($_REQUEST['dataproductEdit'])){
 </head>
 <body>
 
- <form method="post" action="coffeeController.php">
+ <form method="post" action="coffeeController.php" enctype="multipart/form-data">
         <input type="hidden" value="<?php echo $product->id ?>" name="id">
         
         <input type="text" value="<?php echo $product->title ?>" name="title">

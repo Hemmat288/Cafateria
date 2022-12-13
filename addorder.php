@@ -1,6 +1,7 @@
 
 <?php
-   if($_COOKIE["name"]){
+session_start();
+if ($_SESSION["name"]) {
 require("user.php");
 require("product.php");
 require("orders.php");
@@ -57,8 +58,8 @@ $orders = new orders();
     
     <div class="admin" style="display: flex;margin-right:3%;">
      
-     <img style="border-radius: 50%;" src="coffee/<?php echo "$_COOKIE[src]" ?>" width="40" height="40">
-     <p style="margin-left:5%; padding-top:7%"> <?php echo "$_COOKIE[name]" ?></p>
+     <img style="border-radius: 50%;" src="coffee/<?php echo "$_SESSION[src]" ?>" width="40" height="40">
+     <p style="margin-left:5%; padding-top:7%"> <?php echo "$_SESSION[name]" ?></p>
      <a style="margin-left:17%; padding-top:7%; color:#F0CAA3 ;" href="logout.php" name="logout">logout</a>
    </div>
   </nav>
@@ -73,12 +74,12 @@ $orders = new orders();
         <form action="coffeeController.php" method="post" enctype="multipart/form-data">
 
   <!------------------------- user-->
-<select name="selectedUserid" class="form-select userselect" aria-label="Default select example">
+<select  name="selectedUserid" class="form-select userselect" aria-label="Default select example" required>
                   <?php
                    
                   $usersname = $db->show("id,name","user");
                   ?>
-                  <option selected>Select user</option>
+                  <option disabled selected>Select user</option>
                   <?php
                   foreach ($usersname as $row) { ?>
 

@@ -25,16 +25,20 @@
       $studentinfo = $sudentData->fetch(PDO::FETCH_ASSOC);
       $email = $studentinfo["email"];
       $password = $studentinfo["password"];
+      $name = $studentinfo["name"];
+      $image = $studentinfo["image"];
       echo $email . "  " . $password;
       //////////////// $ sudentData check not work with me
       if ($password != "" && $email != "") {
-        setcookie("name", $studentinfo["name"]);
-        setcookie("src", $studentinfo["image"]);
-        session_start();
-        $_SESSION['name']= $$studentinfo["name"];
-       $_SESSION['src']= $studentinfo["image"];
+        // setcookie("name", $studentinfo["name"]);
+        // setcookie("src", $studentinfo["image"]);
+      session_start();
+      $_SESSION['name']= $name;
+      $_SESSION['src']= $image;
 
-        header("location:AllUser.php");
+// echo  $_SESSION['name'];
+// echo $_SESSION['src'];
+      header("location:AllUser.php");
       } else {
         header("location:login.php");
       }
@@ -141,7 +145,7 @@
         $user->ext = $user->validation($_REQUEST['ext']);
         $errors = $user->countError();
 
-  if(!($_REQUEST['img']=="")){
+  if(isset($_FILES['img'])){
     echo"not empty";
         $user->image = $user->validation($_FILES["img"]["name"]);
     
@@ -240,6 +244,10 @@
         $orders->total_price = $orders->validation($_REQUEST['total_price']);
         $orders->note = $orders->validation($_REQUEST['note']);
         $orders->user_id = $orders->validation($_REQUEST['selectedUserid']);
+if(!$_REQUEST['selectedUserid']){
+  header("location:addorder.php");
+}else{
+
 
         $errors = $orders->countError();
         if ($errors > 0) {
@@ -264,6 +272,7 @@
           }
           header("location:Allorder.php?total_price=$total_price");
         }
+      }
       } catch (PDOException $e) {
         echo "error";
       }
@@ -349,7 +358,7 @@
         $product->title = $product->validation($_REQUEST['title']);
         $product->price = $product->validation($_REQUEST['price']);
         $errors = $product->countError();
-        if(!($_REQUEST['img']=="")){
+        if(isset($_FILES['img'])){
           echo "not empty";
           $product->image = $product->validation($_FILES["img"]["name"]);
           echo $product->image;
