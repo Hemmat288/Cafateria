@@ -40,6 +40,12 @@ function select($column ,$table ,$condition){
         $sth->execute();
         return  $result = $sth->fetchAll();
     }
+     function myorderdetails($column,$table,$table2 ,$table3 ,$table4 ,$condition,$condition2){
+     $sth= $this->connection->query("select $column  FROM $table JOIN  $table2 JOIN  $table3 JOIN  $table4 ON $condition WHERE $condition2");
+        $sth->execute();
+        return  $result = $sth->fetchAll();
+    }
+
      function showMix($column , $table){
         $sth =$this->connection->prepare("select MAX($column) FROM $table");
         $sth->execute();
@@ -49,6 +55,29 @@ function select($column ,$table ,$condition){
         return  $orderid= $row['MAX(id)'];
     }
      }
+
+function filterUserbyIdUsingData($column,$table,$condition1,$condition2)
+{
+  $sth=$this->connection->prepare("select $column from $table where $condition1 AND $condition2");
+        $sth->execute();
+        return $result = $sth->fetchAll();
+}
+
+//////////////////////////////////////////// on check.php get user and totla price of her order in filter Date or user filter
+function getUsersByFilter($column,$table,$table2,$condition1,$condition2,$groupbytable){
+    $sth=$this->connection->prepare("select $column from $table join $table2 on $condition1 where $condition2  GROUP BY $groupbytable");
+    $sth->execute();
+    return $result = $sth->fetchAll();
+}
+//////////////////////////////////////////// on check.php get user and totla price of her order withoutttttt filter Date
+function getUsersAndHerOrder($column,$table,$table2,$condition1,$groupbytable){
+    $sth=$this->connection->prepare("select $column from $table join $table2 on $condition1   GROUP BY $groupbytable");
+    $sth->execute();
+    return $result = $sth->fetchAll();
+}
+
+
+
 
      function showdb(){
         return $this->connection->query("SHOW TABLES");

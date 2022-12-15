@@ -23,22 +23,21 @@
       $sudentData = $db->select("*", "user", " email='{$_POST['email']}' and password='{$_POST['password']}'");
  
       $studentinfo = $sudentData->fetch(PDO::FETCH_ASSOC);
+      $id = $studentinfo["id"];
+      $name = $studentinfo["name"];
       $email = $studentinfo["email"];
       $password = $studentinfo["password"];
-      $name = $studentinfo["name"];
       $image = $studentinfo["image"];
+      
       echo $email . "  " . $password;
       //////////////// $ sudentData check not work with me
       if ($password != "" && $email != "") {
-        // setcookie("name", $studentinfo["name"]);
-        // setcookie("src", $studentinfo["image"]);
       session_start();
+      $_SESSION['id']= $id;
       $_SESSION['name']= $name;
       $_SESSION['src']= $image;
 
-// echo  $_SESSION['name'];
-// echo $_SESSION['src'];
-      header("location:AllUser.php");
+       header("location:AllUser.php");
       } else {
         header("location:login.php");
       }
@@ -135,7 +134,6 @@
     //   ----------------------------update user----------------------------
 
     else if (isset($_REQUEST['updateUser'])) {
-
       try {
         $user->id = $user->validation($_REQUEST['id']);
         $user->name = $user->validation($_REQUEST['name']);

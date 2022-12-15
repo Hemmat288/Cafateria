@@ -38,7 +38,7 @@ $orders = new orders();
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="addorder.php">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="addorder.php">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="AllProduct.php">Products</a>
@@ -47,10 +47,13 @@ $orders = new orders();
           <a class="nav-link" href="AllUser.php">Users</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="Allorder.php">Manual Order</a>
+          <a class="nav-link " href="Allorder.php">All Orders</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Checks</a>
+          <a class="nav-link " href="myorder.php">My Orders</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="checks.php">Checks</a>
         </li>
       </ul>
 
