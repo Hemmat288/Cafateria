@@ -216,6 +216,21 @@
         echo $e;
       }
     }
+    
+    //   ----------------------------delete processing order----------------------------
+    // deleteOrder
+    else if (isset($_REQUEST['deleteOrder'])) {
+      $id = $_REQUEST['id'];
+
+      echo $id;
+
+      try {
+        $db->delete("orders", "id=$id");
+        header("location:myorder.php");
+      } catch (PDOException $e) {
+        echo "connection failed";
+      }
+    }
     //   ----------------------------add order----------------------------
     if (isset($_REQUEST['addorder'])) {
       $productid = [];

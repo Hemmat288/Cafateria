@@ -131,10 +131,15 @@ if ($_SESSION["name"]) {
 
                                 echo "<td class='open' ID=$row[id]>$row[date]</td>";
                                 echo "<td><button ID=$row[id] type='button' class='open btn' style='color:#fff;background: #5C3D2E;'>+</button></td>";
-                                echo "<td style='padding-right:8%'><button type='button' class='close btn ' style='color:#fff;background: #5C3D2E;padding:0% 42% 32% 30%;'>_</button></td>";
+                                echo "<td style='padding-right:6%'><button type='button' class='close btn ' style='color:#fff;background: #5C3D2E;padding:0% 42% 32% 30%;'>_</button></td>";
                                 echo "<td>$row[status]</td>";
                                 echo "<td> $allordersprice</td>";
-                                echo "<td>cancel</td>";
+                                if($row["status"]=="processing"){
+                                    echo "<td><a  class='btn btn-danger' href='coffeeController.php?id={$row['id']}&deleteOrder'>Cancel</a></td>";
+                                    }else{
+                                        echo "<td><a  class='btn btn-success' href='coffeeController.php?id={$row['id']}&deleteOrder'>Cancel</a></td>";
+                                    
+                                    }
                                 echo "</tr>";
                             }
                             ?>
@@ -171,10 +176,15 @@ if ($_SESSION["name"]) {
 
                                 echo "<td class='open' ID=$row[id]>$row[date]</td>";
                                 echo "<td><button ID=$row[id] type='button' class='open btn' style='color:#fff;background: #5C3D2E;'>+</button></td>";
-                                echo "<td style='padding-right:8%'><button type='button' class='close btn ' style='color:#fff;background: #5C3D2E;padding:0% 42% 32% 30%;'>_</button></td>";
+                                echo "<td style='padding-right:6%'><button type='button' class='close btn ' style='color:#fff;background: #5C3D2E;padding:0% 42% 32% 30%;'>_</button></td>";
                                 echo "<td>$row[status]</td>";
                                 echo "<td> $allordersprice</td>";
-                                echo "<td>cancel</td>";
+                                if($row["status"]=="processing"){
+                                echo "<td><a  class='btn btn-danger' href='coffeeController.php?id={$row['id']}&deleteOrder'>Cancel</a></td>";
+                                }else{
+                                    echo "<td><a  class='btn btn-success' href='coffeeController.php?id={$row['id']}&deleteOrder'>Cancel</a></td>";
+                                
+                                }
                                 echo "</tr>";
                             }
                             ?>

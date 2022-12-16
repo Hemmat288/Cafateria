@@ -130,6 +130,7 @@ $data=$db->details("orders.date,order_details.order_id,orders.total_price,user.n
      echo "<td>$row[room_number]</td>";
      echo "<td>$row[status]</td>";
 ?>
+
  </tr>
   </tbody>
       </table>
