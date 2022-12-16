@@ -28,7 +28,7 @@ while($data=$result -> fetch_assoc())
 
  <tr>
 <td class="open" ID="<?php echo $data['id'] ?>" ><?php echo $data['date']; ?></td>
-<td><?php    echo "<button onclick='show(this)' ID='".$data['id']."'  type='button' class='btn btn-danger open'>open</button>" 
+<td><?php    echo "<button onclick='show(this)' ID='".$data['id']."'  type='button' class='btn open' style='color:#fff;background: #5C3D2E;'>+</button>" 
          ?></td>
 
 

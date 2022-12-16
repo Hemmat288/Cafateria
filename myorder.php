@@ -21,15 +21,15 @@ if ($_SESSION["name"]) {
     <html lang="en">
 
     <head>
-    <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css">
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
         <title>my order</title>
     </head>
 
@@ -52,11 +52,11 @@ if ($_SESSION["name"]) {
                         <a class="nav-link" href="AllUser.php">Users</a>
                     </li>
                     <li class="nav-item">
-          <a class="nav-link " href="Allorder.php">All Orders</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="myorder.php">My Orders</a>
-        </li>
+                        <a class="nav-link " href="Allorder.php">All Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="myorder.php">My Orders</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="checks.php">Checks</a>
                     </li>
@@ -96,20 +96,20 @@ if ($_SESSION["name"]) {
                         <div class="form-group">
                             <label>Filter</label>
                             <br>
-                            <button type="submit" class="btn btn-info">filter</button>
+                            <button type="submit" class="btn" style="color:#fff;background: #5C3D2E;">filter</button>
                         </div>
                     </div>
             </form>
 
             <?php
             if (isset($_GET['from_date']) && isset($_GET['to_date'])) {
-              
+
                 $from_date = $_GET['from_date'];
                 $to_date = $_GET['to_date'];
                 $id = $_SESSION['id'];
                 $allordersprice = 0;
-    
-                $userorders = $db->filterUserbyIdUsingData("*", "orders", "user_id=$id ","date BETWEEN '$from_date' AND '$to_date'");
+
+                $userorders = $db->filterUserbyIdUsingData("*", "orders", "user_id=$id ", "date BETWEEN '$from_date' AND '$to_date'");
             ?>
 
                 <table class="table table-striped">
@@ -117,7 +117,7 @@ if ($_SESSION["name"]) {
                         <tr>
                             <th scope="col">order Date</th>
                             <th scope="col">open</th>
-                                <th scope="col">close</th>
+                            <th scope="col">close</th>
                             <th scope="col"> status</th>
                             <th scope="col">Amount</th>
                             <th scope="col"> Action</th>
@@ -126,17 +126,17 @@ if ($_SESSION["name"]) {
                     <tbody>
                         <tr>
                             <?php
-                                foreach ($userorders as $key => $row) {
-                                    $allordersprice = $allordersprice + (int)$row['total_price'];
+                            foreach ($userorders as $key => $row) {
+                                $allordersprice = $allordersprice + (int)$row['total_price'];
 
-                                    echo "<td class='open' ID=$row[id]>$row[date]</td>";
-                                    echo "<td><button ID=$row[id] type='button' class='open btn btn-success'>open</button></td>";
-                                    echo "<td><button type='button' class='close btn btn-success'>close</button></td>";
-                                    echo "<td>$row[status]</td>";
-                                    echo "<td> $allordersprice</td>";
-                                    echo "<td>cancel</td>";
-                                     echo "</tr>";
-                                }
+                                echo "<td class='open' ID=$row[id]>$row[date]</td>";
+                                echo "<td><button ID=$row[id] type='button' class='open btn' style='color:#fff;background: #5C3D2E;'>open</button></td>";
+                                echo "<td><button type='button' class='close btn ' style='color:#fff;background: #5C3D2E;'>close</button></td>";
+                                echo "<td>$row[status]</td>";
+                                echo "<td> $allordersprice</td>";
+                                echo "<td>cancel</td>";
+                                echo "</tr>";
+                            }
                             ?>
                     </tbody>
                 </table>
@@ -145,78 +145,76 @@ if ($_SESSION["name"]) {
                 </div>
             <?php
 
-            }
-            else{
+            } else {
                 $id = $_SESSION['id'];
                 $allordersprice = 0;
                 $userorders = $db->select("*", "orders", "user_id=$id");
-                ?>
-    
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">order Date</th>
-                                <th scope="col">open</th>
-                                <th scope="col">close</th>
-                                <th scope="col"> status</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col"> Action</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <?php
-                                    foreach ($userorders as $key => $row) {
-                                        $allordersprice = $allordersprice + (int)$row['total_price'];
-    
+            ?>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">order Date</th>
+                            <th scope="col">open</th>
+                            <th scope="col">close</th>
+                            <th scope="col"> status</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col"> Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <?php
+                            foreach ($userorders as $key => $row) {
+                                $allordersprice = $allordersprice + (int)$row['total_price'];
+
                                 echo "<td class='open' ID=$row[id]>$row[date]</td>";
-                                echo "<td><button ID=$row[id] type='button' class='open btn btn-success'>open</button></td>";
-                                echo "<td><button type='button' class='close btn btn-success'>close</button></td>";
+                                echo "<td><button ID=$row[id] type='button' class='open btn' style='color:#fff;background: #5C3D2E;'>+</button></td>";
+                                echo "<td style='padding-right:8%'><button type='button' class='close btn ' style='color:#fff;background: #5C3D2E;padding:0% 42% 32% 30%;'>_</button></td>";
                                 echo "<td>$row[status]</td>";
                                 echo "<td> $allordersprice</td>";
                                 echo "<td>cancel</td>";
-                                 echo "</tr>";
-                                    }
-                                ?>
-                        </tbody>
-                    </table>
-                    <div class="container bg-success" id="demo">
-    
-                    </div>    
-                    <?php 
+                                echo "</tr>";
+                            }
+                            ?>
+                    </tbody>
+                </table>
+                <div class="container" id="demo">
+
+                </div>
+            <?php
             }
             ?>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
-    <script>
-   
-   $(".open").click(function(e){ 
-           e.preventDefault();
-     var id=$(this).attr("ID");
-           $.ajax({
-               type: 'GET',
-               url: "data.php",
-               data: { id: id },
-               datatype: "html",
-               success: function (data){
-             $("#demo").html(data);
-               }
-           });
-    });
-   
-    $(".close").click(function(e){ 
-   
-    
-             $("#demo").html("");
-   
-    });
-   
-   
-   
-      </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
+            <script>
+                $(".open").click(function(e) {
+                    e.preventDefault();
+                    var id = $(this).attr("ID");
+                    $.ajax({
+                        type: 'GET',
+                        url: "data.php",
+                        data: {
+                            id: id
+                        },
+                        datatype: "html",
+                        success: function(data) {
+                            $("#demo").html(data);
+                        }
+                    });
+                });
+
+                $(".close").click(function(e) {
+
+
+                    $("#demo").html("");
+
+                });
+            </script>
+
     </html>
 
 <?php

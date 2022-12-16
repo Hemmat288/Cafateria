@@ -57,7 +57,7 @@
     background-repeat: repeat-y;
     background-size: cover;
     height:auto;
-    min-height: 100vh;
+    min-height: 300vh !important;
     width: 100%;
 }
 .backorder{
@@ -128,14 +128,16 @@
   }
   .p_detailsOrder{
  color: #5C3D2E;
-  }
+
+}
+  
 
 
     /* //////////////////////////////////////// user/product */
 
 .allorders,.Allproducts,.alluser{
   width: 72%;
-  margin: 5% 0% 2% 16%;
+  margin: 3% 0% 2% 16%;
   background-color:#DB996C;
 
   color: #fff;
@@ -143,7 +145,7 @@
   padding: 2%;
 }
 .linkAdduser,.linkAddproduct,.linkAddorder{
-padding: 3% 0% 1% 0%;
+padding: 2% 0% 1% 0%;
  
 }
 .linkAdduser a,.linkAddorder a ,.linkAddproduct a{

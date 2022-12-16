@@ -69,16 +69,7 @@ $user = new user();
       </nav>
 
 <!-- ///////////////////////////////////////body -->
-<!-- <div class="backorder" style="background-image:url('coffee/CaffeineHeartDisease.jpg') ;
-     background-image: url(coffee/CaffeineHeartDisease.jpg);
-    height: 300vh;
-    position: relative;
-    background-position: center;
-    background-repeat: repeat-y;
-    
-    background-size: content;
-    width: 100%;
-     "> -->
+<div class="back"> 
 <div class="allorders">
      <h2 class="linkAddorder"><a href="addorder.php">Add Order</a></h2> 
 
@@ -170,7 +161,7 @@ if(isset($total_price)){
 <?php
 }
 ?>
-<!-- </div> -->
+</div>
 </body>
 
 </html>

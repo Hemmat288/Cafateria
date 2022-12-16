@@ -24,16 +24,20 @@ orders.id=order_details.order_id AND
 user.id=orders.user_id AND 
 order_details.product_id=product.id
 WHERE orders.id=$id");
+?>
+       <h4 style="color: #986644; text-align:center; margin:5%;">products</h4>
+<?php
 while($data=$result -> fetch_assoc())
 {
 ?>
- <div style="float:left;width:25%;" class="w-25 mt-2  text-center" >
-     <h1 class="text-center"  ><?php echo $data['qty'] ." ".$data['title'] ; ?></h1>
-     <img    src="coffee/<?php echo $data['image'];?>" style="width:60%;" height="100px" class="m-auto" >
-    <h1 class="text-center"  ><?php echo $data['total_price'] ." LE" ?></h1>
-
-
-  </div>
+  <div style="float:left; width:25%; margin-top:1%; text-align:center; ">
+    <div  class="position-relative">
+    <img width="100" height="90" style="border-radius:10%" src="coffee/<?php echo $data['image']?>">
+  <span style="background:#986644 !important;" class="position-absolute top-20 start-60 translate-middle p-2   badge rounded-pill bg-dark border border-light ">
+  <?php echo $data['price']?>LE </span>
+</div>
+     <p class="p_detailsOrder"><?php echo$data['qty']."  " . $data['title']?></p>
+    </div>
 <?php
 }
 

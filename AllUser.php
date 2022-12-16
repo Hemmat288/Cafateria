@@ -95,11 +95,16 @@ if ($_SESSION["name"]) {
                 foreach ($row as $key => $value) {
 
                   if ($key != 'password') {
+                    if($key =="image"){
+                      echo "<td><img src='coffee/$value' width='60' height='50'> </td>";
+                    }
+                    else{
                     echo "<td> $value </td>";
-                  }
+                  }}
                 }
-                echo "<td><a href='coffeeController.php?id={$row['id']}&edituser'>edit</a></td>";
-                echo "<td><a href='coffeeController.php?id={$row['id']}&delete'>delete</a></td>";
+               
+                echo "<td><a class='btn btn-secondary' href='coffeeController.php?id={$row['id']}&edituser'>edit</a></td>";
+                echo "<td><a  class='btn btn-danger' href='coffeeController.php?id={$row['id']}&delete'>delete</a></td>";
                 echo  "</tr>";
               }
             } catch (PDOException $e) {

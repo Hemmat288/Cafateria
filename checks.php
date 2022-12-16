@@ -70,60 +70,74 @@ if ($_SESSION["name"]) {
                 <a style="margin-left:17%; padding-top:7%; color:#F0CAA3 ;" href="logout.php" name="logout">logout</a>
             </div>
         </nav>
-
-        <!-- ///////////////////////////////////////body -->
+        <!-- 
+        ///////////////////////////////////////body ////////////////// -->
 
         <div class="allorders">
-            <!-- ----------------------------------form for filter------------- -->
-            <form action="" method="get">
+            <!-- <div style="text-align: center; margin:3% 0% 5% 0%; color:#5C3D2E;">
+            <h4>You Can Filter By Date or Select specific user </h4>
+            </div> -->
+
+            <!-- ----------------------------------form for filter Date ------------- -->
+            <form action="" method="get" style="display:inline; float:left;margin-bottom: 4%;">
 
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label>From Date</label>
                             <br>
                             <input type="date" name="from_date" class="form-control">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label>From Date</label>
                             <br>
                             <input type="date" name="to_date" class="form-control">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label>Filter</label>
                             <br>
-                            <button type="submit" class="btn btn-info">filter</button>
+                            <button type="submit" class="btn" style="color:#fff;background: #5C3D2E;">filter</button>
                         </div>
                     </div>
+                </div>
             </form>
             <!-- //////////////////////////////////////////select user -->
-            <form action="" class="row">
+            <form action="" style="display:inline; float:right;margin-bottom: 4%;">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label> Filter User</label>
+                            <br>
 
-                <div class="col-md-8">
-                    <select name="userid" class="form-select" aria-label="Default select example">
-                        <?php
-                        $cont = $db->show("*", "user");
 
-                        ?>
-                        <option selected>Filter By User</option>
+                            <select name="userid" style="padding:2%;" class="form-select" aria-label="Default select example">
+                                <?php
+                                $cont = $db->show("*", "user");
 
-                        <?php
-                        foreach ($cont as $key => $row) { ?>
+                                ?>
+                                <option selected>Filter By User</option>
 
-                            <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
-                        <?php
-                        }
-                        ?>
-                    </select>
-                </div>
+                                <?php
+                                foreach ($cont as $key => $row) { ?>
 
-                <div class="col-md-2">
-                    <button class="btn btn-info" type="submit">Filter</button>
-
+                                    <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label> Filter </label>
+                            <br>
+                            <button class="btn" style="color:#fff;background: #5C3D2E;" type="submit">Filter</button>
+                        </div>
+                    </div>
                 </div>
             </form>
 
@@ -152,9 +166,12 @@ if ($_SESSION["name"]) {
                         <tr>
                             <?php
                             foreach ($userorders as $key => $row) {
-                                echo "<td >$row[name]</td>";  
-                                echo "<td><button DateFrom=$from_date DateTo=$to_date ID=$row[user_id] type='button' class='btn btn-success openfromfilter'>open</button></td>";
-                                echo "<td><button type='button' class='close btn btn-success'>close</button></td>";
+                                echo "<td >$row[name]</td>";
+
+
+
+                                echo "<td><button DateFrom=$from_date DateTo=$to_date ID=$row[user_id] type='button'style='color:#fff;background: #5C3D2E;' class='btn openfromfilter'>+</button></td>";
+                                echo "<td  style='padding-right:14%'><button type='button' class='close btn' style='color:#fff;background: #5C3D2E;padding:0% 42% 32% 30%;'>-</button></td>";
                                 echo "<td>$row[final]  LE</td>";
 
                                 echo "</tr>";
@@ -203,8 +220,12 @@ if ($_SESSION["name"]) {
                             <?php
                             foreach ($userorders as $key => $row) {
                                 echo "<td >$row[name]</td>";
-                                echo "<td><button ID=$row[user_id] type='button' class='open btn btn-success openn'>open</button></td>";
-                                echo "<td><button type='button' class='close btn btn-success'>close</button></td>";
+
+
+
+
+                                echo "<td><button ID=$row[user_id] type='button' style='color:#fff;background: #5C3D2E;' class='open btn  openn'>+</button></td>";
+                                echo "<td  style='padding-right:14%'><button type='button'style='color:#fff;background: #5C3D2E;padding:0% 42% 32% 30%;' class='close btn '>-</button></td>";
                                 echo "<td>$row[final]  LE</td>";
 
                                 echo "</tr>";
@@ -254,8 +275,8 @@ if ($_SESSION["name"]) {
                             <?php
                             foreach ($userorders as $key => $row) {
                                 echo "<td >$row[name]</td>";
-                                echo "<td><button  ID=$row[user_id] type='button' class='open btn btn-success openn'>open</button></td>";
-                                echo "<td><button type='button' class='close btn btn-success'>close</button></td>";
+                                echo "<td><button  ID=$row[user_id] type='button' class='open btn  openn'style='color:#fff;background: #5C3D2E;'>+</button></td>";
+                                echo "<td  style='padding-right:14%'><button type='button' style='color:#fff;background:#5C3D2E ;padding:0% 42% 32% 30%;' class='close btn '>-</button></td>";
                                 echo "<td>$row[final]  LE</td>";
 
                                 echo "</tr>";
@@ -291,27 +312,30 @@ if ($_SESSION["name"]) {
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
             <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
-           
-<script>
-  $(".openfromfilter").click(function(e) {
-    e.preventDefault();
-    var id = $(this).attr("ID");
-    var DateFrom = $(this).attr("DateFrom");
-    var DateTo = $(this).attr("DateTo");
 
-    $.ajax({
-      type: 'GET',
-      url: "filterUserByorderDate.php",
-      data: {
-        id: id,
-        DateFrom: DateFrom,
-        DateTo: DateTo
-      },
-      datatype: "html",
-      success: function(data) {
+            <script>
+                $(".openfromfilter").click(function(e) {
+                    e.preventDefault();
+                    var id = $(this).attr("ID");
+                    var DateFrom = $(this).attr("DateFrom");
+                    var DateTo = $(this).attr("DateTo");
 
-        var cartona = `
-<table class="table my-4">
+                    $.ajax({
+                        type: 'GET',
+                        url: "filterUserByorderDate.php",
+                        data: {
+                            id: id,
+                            DateFrom: DateFrom,
+                            DateTo: DateTo
+                        },
+                        datatype: "html",
+                        success: function(data) {
+
+                            var cartona = `
+        <h4 style="color: #986644; text-align:center; margin:5%;">All Orders</h4>
+
+ <table class="table table-striped">
+        
   <thead>
     <tr>
       <th scope="col">Order Date</th>
@@ -331,35 +355,35 @@ if ($_SESSION["name"]) {
 
 
 
-        $("#demo").html(cartona);
-        $("#demo2").html("");
+                            $("#demo").html(cartona);
+                            $("#demo2").html("");
 
 
-      }
+                        }
 
 
-    });
-  });
+                    });
+                });
 
 
-  $(".openn").click(function(e) {
-    e.preventDefault();
-    var id = $(this).attr("ID");
+                $(".openn").click(function(e) {
+                    e.preventDefault();
+                    var id = $(this).attr("ID");
 
-    $.ajax({
-      type: 'GET',
-      url: "ajaxuser.php",
-      data: {
-        id: id
-      },
+                    $.ajax({
+                        type: 'GET',
+                        url: "ajaxuser.php",
+                        data: {
+                            id: id
+                        },
 
-      datatype: "html",
+                        datatype: "html",
 
-      success: function(data) {
+                        success: function(data) {
 
-        var cartona = `
-          
-<table class="table my-4">
+                            var cartona = `
+        <h4 style="color: #986644; text-align:center; margin:5%;">user orders</h4>
+        <table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">Order Date</th>
@@ -379,80 +403,72 @@ if ($_SESSION["name"]) {
 
 
 
-        $("#demo").html(cartona);
-        $("#demo2").html("");
+                            $("#demo").html(cartona);
+                            $("#demo2").html("");
 
 
-      }
+                        }
 
 
-    });
-  });
+                    });
+                });
 
-  function show(e) {
-    //    e.preventDefault();
-    var id = $(e).attr("ID");
-    $.ajax({
-      type: 'GET',
-      url: "data.php",
-      data: {
-        id: id
-      },
+                function show(e) {
+                    //    e.preventDefault();
+                    var id = $(e).attr("ID");
+                    $.ajax({
+                        type: 'GET',
+                        url: "data.php",
+                        data: {
+                            id: id
+                        },
 
-      datatype: "html",
+                        datatype: "html",
 
-      success: function(data) {
-        $("#demo2").html(data);
-
-
-      }
+                        success: function(data) {
+                            $("#demo2").html(data);
 
 
-    });
+                        }
 
 
+                    });
+                }
+
+                //   $(".open").click(function(e) {
+                //     e.preventDefault();
+                //     var id = $(this).attr("ID");
+                //     $.ajax({
+                //       type: 'GET',
+                //       url: "data.php",
+                //       data: {
+                //         id: 2
+                //       },
+
+                //       datatype: "html",
+
+                //       success: function(data) {
+
+                //         $("#demo2").html(data);
 
 
+                //       }
 
 
+                //     });
+                //   });
 
 
-  }
+                $(".close").click(function(e) {
+                    $("#demo").html("");
+                    $("#demo2").html("");
 
-  $(".open").click(function(e) {
-    e.preventDefault();
-    var id = $(this).attr("mohamed");
-    $.ajax({
-      type: 'GET',
-      url: "data.php",
-      data: {
-        id: 2
-      },
+                });
+            </script>
 
-      datatype: "html",
+    </body>
 
-      success: function(data) {
-
-        $("#demo2").html(data);
-
-
-      }
-
-
-    });
-  });
-
-
-  $(".close1").click(function(e) {
-    $("#demo").html("");
-    $("#demo2").html("");
-
-  });
-</script>
-
-</body>
-
-</html>
+    </html>
 <?php
 
 
