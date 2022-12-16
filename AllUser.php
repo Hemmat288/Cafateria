@@ -66,8 +66,7 @@ if ($_SESSION["name"]) {
     </nav>
 
     <!-- ///////////////////////////////////////body -->
-
-    <div class="back">
+ 
       <div class="alluser">
         <h2 class="linkAdduser"><a href="adduser.php">Add User</a></h2>
 
@@ -116,7 +115,7 @@ if ($_SESSION["name"]) {
           </tbody>
         </table>
       </div>
-    </div>
+  
   </body>
 
   </html>

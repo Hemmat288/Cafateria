@@ -168,8 +168,7 @@ if ($_SESSION["name"]) {
                             foreach ($userorders as $key => $row) {
                                 echo "<td >$row[name]</td>";
 
-
-
+  
                                 echo "<td><button DateFrom=$from_date DateTo=$to_date ID=$row[user_id] type='button'style='color:#fff;background: #5C3D2E;' class='btn openfromfilter'>+</button></td>";
                                 echo "<td  style='padding-right:14%'><button type='button' class='close btn' style='color:#fff;background: #5C3D2E;padding:0% 42% 32% 30%;'>-</button></td>";
                                 echo "<td>$row[final]  LE</td>";
@@ -189,7 +188,6 @@ if ($_SESSION["name"]) {
                             </div>
                             <div class="container">
                                 <div class="container">
-
                                     <div class="container">
                                         <div id="demo2">
                                         </div>
@@ -205,7 +203,6 @@ if ($_SESSION["name"]) {
                 $userid = $_GET['userid'];
                 $userorders = $db->getUsersByFilter("orders.user_id,sum(orders.total_price) AS final ,user.name", "orders", "user", "orders.user_id=user.id", "orders.user_id=$userid", "orders.user_id");
             ?>
-
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -220,14 +217,9 @@ if ($_SESSION["name"]) {
                             <?php
                             foreach ($userorders as $key => $row) {
                                 echo "<td >$row[name]</td>";
-
-
-
-
                                 echo "<td><button ID=$row[user_id] type='button' style='color:#fff;background: #5C3D2E;' class='open btn  openn'>+</button></td>";
                                 echo "<td  style='padding-right:14%'><button type='button'style='color:#fff;background: #5C3D2E;padding:0% 42% 32% 30%;' class='close btn '>-</button></td>";
                                 echo "<td>$row[final]  LE</td>";
-
                                 echo "</tr>";
                             }
                             ?>
@@ -332,7 +324,7 @@ if ($_SESSION["name"]) {
                         success: function(data) {
 
                             var cartona = `
-        <h4 style="color: #986644; text-align:center; margin:5%;">All Orders</h4>
+        <h4 style="color: #986644; text-align:center; margin:5%;">User Orders</h4>
 
  <table class="table table-striped">
         
@@ -382,7 +374,7 @@ if ($_SESSION["name"]) {
                         success: function(data) {
 
                             var cartona = `
-        <h4 style="color: #986644; text-align:center; margin:5%;">user orders</h4>
+        <h4 style="color: #986644; text-align:center; margin:5%;">User Orders</h4>
         <table class="table table-striped">
   <thead>
     <tr>

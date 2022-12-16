@@ -69,7 +69,7 @@ $user = new user();
       </nav>
 
 <!-- ///////////////////////////////////////body -->
-<div class="back"> 
+
 <div class="allorders">
      <h2 class="linkAddorder"><a href="addorder.php">Add Order</a></h2> 
 
@@ -161,7 +161,7 @@ if(isset($total_price)){
 <?php
 }
 ?>
-</div>
+
 </body>
 
 </html>

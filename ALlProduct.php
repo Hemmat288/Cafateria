@@ -65,7 +65,7 @@ $product = new product();
       </nav>
 
 <!-- ///////////////////////////////////////body -->
-<div class="back">
+ 
   <div class="Allproducts">
     <h2 class="linkAddproduct">  <a href="addproduct.php">Add Product</a></h2>
     <table class="table table-striped">
@@ -112,7 +112,7 @@ $pdo = null;
   </tbody>
 </table>
     </div>
-    </div>
+  
 </body>
 
 </html>

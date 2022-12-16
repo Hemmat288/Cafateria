@@ -130,8 +130,8 @@ if ($_SESSION["name"]) {
                                 $allordersprice = $allordersprice + (int)$row['total_price'];
 
                                 echo "<td class='open' ID=$row[id]>$row[date]</td>";
-                                echo "<td><button ID=$row[id] type='button' class='open btn' style='color:#fff;background: #5C3D2E;'>open</button></td>";
-                                echo "<td><button type='button' class='close btn ' style='color:#fff;background: #5C3D2E;'>close</button></td>";
+                                echo "<td><button ID=$row[id] type='button' class='open btn' style='color:#fff;background: #5C3D2E;'>+</button></td>";
+                                echo "<td style='padding-right:8%'><button type='button' class='close btn ' style='color:#fff;background: #5C3D2E;padding:0% 42% 32% 30%;'>_</button></td>";
                                 echo "<td>$row[status]</td>";
                                 echo "<td> $allordersprice</td>";
                                 echo "<td>cancel</td>";
@@ -140,7 +140,7 @@ if ($_SESSION["name"]) {
                             ?>
                     </tbody>
                 </table>
-                <div class="container bg-success" id="demo">
+                <div class="container " id="demo">
 
                 </div>
             <?php
