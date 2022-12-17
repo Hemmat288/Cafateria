@@ -102,7 +102,7 @@ if ($_SESSION["name"]) {
         </div>
       </div>
 
-      <input type="submit" value="update" name="updateproduct">
+      <input   type="submit" value="update" name="updateproduct" class="usersubmitbtn">
   </form>
 </div>
  </div>

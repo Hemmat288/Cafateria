@@ -271,13 +271,12 @@ if(!$_REQUEST['selectedUserid']){
           $note = $orders->note;
           $user_id = $orders->user_id;
           echo "hi2";
-
-          ///////////////////////////add in orders
+         /////////add in orders
           $db->insert("orders", "
                total_price ='$total_price',
                note='$note',user_id='$user_id'");
           echo "hi3";
-          ///////////////////////////add in orderDetails
+          ////////add in orderDetails
           $order_id = $db->showMix("id", "orders");
 
           for ($i = 0; $i < count($productcount); $i++) {
@@ -290,6 +289,16 @@ if(!$_REQUEST['selectedUserid']){
         echo "error";
       }
     }
+ //   ----------------------------update order status----------------------------
+
+ if (isset($_REQUEST['status'])) {
+  $id=$_GET['id'];
+$status=$_GET['status'];
+echo $id;
+echo $status;
+ $db->update("orders","status='$status'","id=$id");
+ header("location:Allorder.php");
+ }
 
     //   ----------------------------add product----------------------------
     if (isset($_REQUEST['addproduct'])) {
@@ -373,51 +382,51 @@ if(!$_REQUEST['selectedUserid']){
         $errors = $product->countError();
         if(isset($_FILES['img'])){
           echo "not empty";
-          $product->image = $product->validation($_FILES["img"]["name"]);
-          echo $product->image;
-          $imgExtension = pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);
-          $allowedExtension = ["png", "jpg", "txt","jfif","jpeg"];
-          if (!in_array($imgExtension, $allowedExtension)) {
-            $errors["imgExtension"] = "not in allow imgExtension";
-            header("location:login.php?errors=$imgExtension");
-          }
+        //   $product->image = $product->validation($_FILES["img"]["name"]);
+        //   echo $product->image;
+        //   $imgExtension = pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);
+        //   $allowedExtension = ["png", "jpg", "txt","jfif","jpeg"];
+        //   if (!in_array($imgExtension, $allowedExtension)) {
+        //     $errors["imgExtension"] = "not in allow imgExtension";
+        //     header("location:login.php?errors=$imgExtension");
+        //   }
   
-          if (!move_uploaded_file(
-            $_FILES["img"]["tmp_name"],
-            $_FILES["img"]["name"]
-          )) {
-            $errors["img"] = "img is not exists";
-          }
-          if ($errors > 0) {
-            $errorArray = json_encode($product->errors);
-            header("location:login.php?errorArray=$errorArray");
-          } else {
-            $id = $product->id;
-            $title = $product->title;
-            $price = $product->price;
-            $image = $product->image;
-           $db->update("product", "title ='$title',price='$price',image='$image'", "id= $id");
-        header("location:AllProduct.php?length=$er");
-        }
+        //   if (!move_uploaded_file(
+        //     $_FILES["img"]["tmp_name"],
+        //     "coffee/$_FILES[img][name]"
+        //   )) {
+        //     $errors["img"] = "img is not exists";
+        //   }
+        //   if ($errors > 0) {
+        //     $errorArray = json_encode($product->errors);
+        //     header("location:login.php?errorArray=$errorArray");
+        //   } else {
+        //     $id = $product->id;
+        //     $title = $product->title;
+        //     $price = $product->price;
+        //     $image = $product->image;
+        //    $db->update("product", "title ='$title',price='$price',image='$image'", "id= $id");
+        // header("location:AllProduct.php?length=$er");
+        // }
       }
       ////////////////////product widthout image
       else{
         echo " empty";
-        if ($errors > 0) {
-          $errorArray = json_encode($product->errors);
-          header("location:login.php?errorArray=$errorArray");
-        } 
-        else {
-          $id = $product->id;
-          $title = $product->title;
-          $price = $product->price;
-          echo $id;
-          echo $title;
-          echo $price;
-          $db->update("product", "title ='$title',price='$price'", "id= $id");
+        // if ($errors > 0) {
+        //   $errorArray = json_encode($product->errors);
+        //   header("location:login.php?errorArray=$errorArray");
+        // } 
+        // else {
+        //   $id = $product->id;
+        //   $title = $product->title;
+        //   $price = $product->price;
+        //   echo $id;
+        //   echo $title;
+        //   echo $price;
+        //   $db->update("product", "title ='$title',price='$price'", "id= $id");
 
-         header("location:AllProduct.php?length=$er");
-        }
+        //  header("location:AllProduct.php?length=$er");
+        // }
       }
       } catch (PDOException $e) {
         echo $e;
