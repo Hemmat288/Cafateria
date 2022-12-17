@@ -382,51 +382,51 @@ echo $status;
         $errors = $product->countError();
         if(isset($_FILES['img'])){
           echo "not empty";
-        //   $product->image = $product->validation($_FILES["img"]["name"]);
-        //   echo $product->image;
-        //   $imgExtension = pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);
-        //   $allowedExtension = ["png", "jpg", "txt","jfif","jpeg"];
-        //   if (!in_array($imgExtension, $allowedExtension)) {
-        //     $errors["imgExtension"] = "not in allow imgExtension";
-        //     header("location:login.php?errors=$imgExtension");
-        //   }
+          $product->image = $product->validation($_FILES["img"]["name"]);
+          echo $product->image;
+          $imgExtension = pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);
+          $allowedExtension = ["png", "jpg", "txt","jfif","jpeg"];
+          if (!in_array($imgExtension, $allowedExtension)) {
+            $errors["imgExtension"] = "not in allow imgExtension";
+            header("location:login.php?errors=$imgExtension");
+          }
   
-        //   if (!move_uploaded_file(
-        //     $_FILES["img"]["tmp_name"],
-        //     "coffee/$_FILES[img][name]"
-        //   )) {
-        //     $errors["img"] = "img is not exists";
-        //   }
-        //   if ($errors > 0) {
-        //     $errorArray = json_encode($product->errors);
-        //     header("location:login.php?errorArray=$errorArray");
-        //   } else {
-        //     $id = $product->id;
-        //     $title = $product->title;
-        //     $price = $product->price;
-        //     $image = $product->image;
-        //    $db->update("product", "title ='$title',price='$price',image='$image'", "id= $id");
-        // header("location:AllProduct.php?length=$er");
-        // }
+          if (!move_uploaded_file(
+            $_FILES["img"]["tmp_name"],
+            "coffee/$_FILES[img][name]"
+          )) {
+            $errors["img"] = "img is not exists";
+          }
+          if ($errors > 0) {
+            $errorArray = json_encode($product->errors);
+            header("location:login.php?errorArray=$errorArray");
+          } else {
+            $id = $product->id;
+            $title = $product->title;
+            $price = $product->price;
+            $image = $product->image;
+           $db->update("product", "title ='$title',price='$price',image='$image'", "id= $id");
+        header("location:AllProduct.php?length=$er");
+        }
       }
       ////////////////////product widthout image
       else{
         echo " empty";
-        // if ($errors > 0) {
-        //   $errorArray = json_encode($product->errors);
-        //   header("location:login.php?errorArray=$errorArray");
-        // } 
-        // else {
-        //   $id = $product->id;
-        //   $title = $product->title;
-        //   $price = $product->price;
-        //   echo $id;
-        //   echo $title;
-        //   echo $price;
-        //   $db->update("product", "title ='$title',price='$price'", "id= $id");
+        if ($errors > 0) {
+          $errorArray = json_encode($product->errors);
+          header("location:login.php?errorArray=$errorArray");
+        } 
+        else {
+          $id = $product->id;
+          $title = $product->title;
+          $price = $product->price;
+          echo $id;
+          echo $title;
+          echo $price;
+          $db->update("product", "title ='$title',price='$price'", "id= $id");
 
-        //  header("location:AllProduct.php?length=$er");
-        // }
+         header("location:AllProduct.php?length=$er");
+        }
       }
       } catch (PDOException $e) {
         echo $e;

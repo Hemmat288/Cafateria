@@ -182,7 +182,7 @@ if ($_SESSION["name"]) {
                                 if($row["status"]=="processing"){
                                 echo "<td><a  class='btn btn-danger' href='coffeeController.php?id={$row['id']}&deleteOrder'>Cancel</a></td>";
                                 }else{
-                                    echo "<td><a  class='btn btn-success' href='coffeeController.php?id={$row['id']}&deleteOrder'>Cancel</a></td>";
+                                    echo "<td><a  class='btn btn-success'>Cancel</a></td>";
                                 
                                 }
                                 echo "</tr>";

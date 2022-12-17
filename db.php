@@ -32,9 +32,7 @@ function select($column ,$table ,$condition){
      function update($table,$value,$condition){
          return $this->connection->query("update $table set $value where $condition");
      }
-     function updatevalue($table,$column,$value,$condition){
-         return $this->connection->query("update $table set $column= $value where $condition");
-     }
+
        function show($column ,$table){
     return $this->connection->query  ("select $column from $table");
      }

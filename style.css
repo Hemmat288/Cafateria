@@ -34,6 +34,11 @@
     font-size: 17px;
     /* margin: 5% 5% 0% 787%; */
   }
+  .adminImg {
+    border-radius: 50%;
+    width:40;
+     height:40;
+  }
   .admin a{
     color:#F0CAA3 ;
     font-size: 17px;
@@ -233,3 +238,6 @@ table {
     .imgproduct{
       margin: 2%;
     }
+.myordertable td{
+padding-right: 2%;
+}

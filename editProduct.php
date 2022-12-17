@@ -98,11 +98,11 @@ if ($_SESSION["name"]) {
      
        
         <div class="col-sm-10  Imgaddprodct">
-        <input name="img" type="file"    value="<?php echo $product->image ?>" >
+        <input name="img" type="file" class="btn" style="color:#fff;background: #5C3D2E;" >
         </div>
       </div>
 
-      <input   type="submit" value="update" name="updateproduct" class="usersubmitbtn">
+      <input  type="submit" value="update" name="updateproduct" class="usersubmitbtn">
   </form>
 </div>
  </div>
